@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         accentColor: kMainColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginScreen(),
+      home: Members(),
     );
   }
 }

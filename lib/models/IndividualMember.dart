@@ -25,38 +25,39 @@ class IndividualMember extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.2,
                   width: MediaQuery.of(context).size.width * 0.3,
                 ),
-                child: (member.speakerImage == "" ||
-                        member.speakerImage == null )
-                    ? FittedBox(
-                        fit: BoxFit.contain,
-                        child: Icon(
-                          Icons.account_circle,
-                          color: Colors.green,
-                        ),
-                      )
-                    : CachedNetworkImage(
-                        imageUrl: member.speakerImage ?? "",
-                        imageBuilder: (context, imageProvider) => Container(
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: imageProvider,
-                                    fit: BoxFit.cover,
-                                    colorFilter: ColorFilter.mode(
-                                        Colors.red, BlendMode.colorBurn)),
-                              ),
-                            ),
-                        placeholder: (context, url) =>
-                            CircularProgressIndicator(),
-                        errorWidget: (context, url, error) {
-                          print(error.toString());
-                          return FittedBox(
+                child:
+                    (member.speakerImage == "" || member.speakerImage == null)
+                        ? FittedBox(
                             fit: BoxFit.contain,
                             child: Icon(
-                              Icons.error,
-                              color: Colors.red,
+                              Icons.account_circle,
+                              color: Colors.green,
                             ),
-                          );
-                        })),
+                          )
+                        : CachedNetworkImage(
+                            imageUrl: member.speakerImage ?? "",
+                            imageBuilder: (context, imageProvider) => Container(
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: imageProvider,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) =>
+                                    CircularProgressIndicator(
+                                        value: downloadProgress.progress),
+                            errorWidget: (context, url, error) {
+                              print(error.toString());
+                              return FittedBox(
+                                fit: BoxFit.contain,
+                                child: Icon(
+                                  Icons.error,
+                                  color: Colors.red,
+                                ),
+                              );
+                            })),
             SizedBox(
               width: 20,
             ),
