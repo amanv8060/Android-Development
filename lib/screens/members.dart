@@ -59,6 +59,9 @@ class _MembersState extends State<Members> {
                         child: Text(snapshot.error.toString()),
                       );
                     }
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
                   }
                   break;
                 case ConnectionState.none:
